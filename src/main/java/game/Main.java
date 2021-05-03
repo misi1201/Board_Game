@@ -1,4 +1,4 @@
-package hello;
+package game;
 
 import javafx.application.Application;
 
