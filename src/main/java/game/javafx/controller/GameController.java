@@ -10,15 +10,21 @@ public class GameController {
     @FXML
     Pane pane;
 
+    private int size = 400;
+    private int spots = 5;
+    private int squareSize = size / spots;
+
+
+
 
     @FXML
     public void initialize(){
-        for(int i = 0; i < 200; i+= 40){
-            for(int j = 0; j < 200; j+= 40){
-                Rectangle r = new Rectangle(i,j,40,40);
+        for(int i = 0; i < 320; i+= squareSize){
+            for(int j = 0; j < size; j+= squareSize){
+                Rectangle r = new Rectangle(i,j,squareSize,squareSize);
                 r.setFill(Color.WHITE);
                 r.setStroke(Color.BLACK);
-                pane.getChildren().add(r);
+                pane.getChildren().addAll(r);
             }
         }
 
