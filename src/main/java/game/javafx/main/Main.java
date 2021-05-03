@@ -1,5 +1,6 @@
-package game;
+package game.javafx.main;
 
+import game.javafx.main.App;
 import javafx.application.Application;
 
 public class Main {
