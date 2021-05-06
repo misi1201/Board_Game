@@ -1,6 +1,7 @@
 package game.javafx.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -47,6 +48,10 @@ public class GameController {
                 c.setTranslateY(y);
                 pane.getChildren().add(c);
 
+                c.setOnMousePressed(mouseEvent -> mousePressed(mouseEvent, c));
+                c.setOnMouseDragged(mouseEvent -> mouseDragged(mouseEvent, c));
+                c.setOnMouseReleased(mouseEvent -> mouseReleased(mouseEvent, c));
+
 
             }
             else {
@@ -62,6 +67,9 @@ public class GameController {
                     c.setTranslateY(y);
                     pane.getChildren().add(c);
 
+                    c.setOnMousePressed(mouseEvent -> mousePressed(mouseEvent, c));
+                    c.setOnMouseDragged(mouseEvent -> mouseDragged(mouseEvent, c));
+                    c.setOnMouseReleased(mouseEvent -> mouseReleased(mouseEvent, c));
 
 
                 }
@@ -72,10 +80,31 @@ public class GameController {
 
 
 
-
-
-
-
 }
+
+
+    private void mouseReleased(MouseEvent mouseEvent, Circle c) {
+        int gridX = (int) c.getTranslateX() / squareSize;
+        int gridY = (int) c.getTranslateY() / squareSize;
+
+        int dirX = (int) (squareSize / 2) + squareSize * gridX;
+        int dirY = (int) (squareSize / 2) + squareSize * gridY;
+
+        c.setTranslateX(dirX);
+        c.setTranslateY(dirY);
+
+
+    }
+
+    private void mouseDragged(MouseEvent mouseEvent, Circle c) {
+        c.setTranslateX(c.getTranslateX() + mouseEvent.getX());
+        c.setTranslateY(c.getTranslateY() + mouseEvent.getY());
+    }
+
+    private void mousePressed(MouseEvent mouseEvent, Circle c) {
+
+    }
+
+
 
 }
