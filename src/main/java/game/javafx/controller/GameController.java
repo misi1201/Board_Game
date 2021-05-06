@@ -3,6 +3,7 @@ package game.javafx.controller;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class GameController {
@@ -29,6 +30,52 @@ public class GameController {
         }
 
 
+
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            Circle c = new Circle();
+            if (i == 0 && j == 0 || i == 2 && j == 0 || i == 1 && j == 4 || i == 3 && j == 4) {
+                c.setFill(Color.BLUE);
+                c.setStroke(Color.BLACK);
+
+                double radius = squareSize / 2.5;
+                int x = squareSize / 2 + squareSize * (0+i);
+                int y = squareSize / 2 + squareSize * (0+j);
+                c.setRadius(radius);
+                c.setTranslateX(x);
+                c.setTranslateY(y);
+                pane.getChildren().add(c);
+
+
+            }
+            else {
+                if (i == 1 && j == 0 || i == 3 && j == 0 || i == 0 && j == 4 || i == 2 && j == 4) {
+                    c.setFill(Color.RED);
+                    c.setStroke(Color.BLACK);
+
+                    double radius = squareSize / 2.5;
+                    int x = squareSize / 2 + squareSize * (0 + i);
+                    int y = squareSize / 2 + squareSize * (0 + j);
+                    c.setRadius(radius);
+                    c.setTranslateX(x);
+                    c.setTranslateY(y);
+                    pane.getChildren().add(c);
+
+
+
+                }
+            }
+        }
     }
+
+
+
+
+
+
+
+
+}
 
 }
