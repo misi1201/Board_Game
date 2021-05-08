@@ -1,5 +1,7 @@
 package game.javafx.controller;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -103,6 +105,14 @@ public class GameController {
 
     private void mousePressed(MouseEvent mouseEvent, Circle c) {
 
+    }
+
+    public void exitGame(ActionEvent actionEvent) {
+        Platform.exit();
+    }
+
+    public void resetGame(ActionEvent actionEvent) {
+        initialize();
     }
 
 
