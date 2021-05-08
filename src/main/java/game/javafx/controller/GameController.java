@@ -1,22 +1,47 @@
 package game.javafx.controller;
 
+import game.model.GameModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 public class GameController {
 
     @FXML
-    Pane pane;
+    private Pane pane;
+
+    @FXML
+    private Text player1name;
+
+    @FXML
+    private Text player2name;
+
+    @FXML
+    private Text player1steps;
+
+    @FXML
+    private Text player2steps;
+
+    @FXML
+    private Label winnerLabel;
+
 
     private int size = 400;
     private int spots = 5;
     private int squareSize = size / spots;
+    private int prevX;
+    private int prevY;
+    private GameModel gameModel;
+    private int currentPlayer;
+    private String p1name;
+    private String p2name;
 
 
 
