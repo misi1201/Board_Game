@@ -274,5 +274,13 @@ public class GameModel {
         }
     }
 
+    public boolean isGameOver () {
+        if (hasBlueWon() || hasRedWon()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }
