@@ -1,5 +1,10 @@
 package game.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class GameModel {
 
     private static final int RIGHT = 0;
@@ -34,54 +39,10 @@ public class GameModel {
     };
 
 
-    public GameModel() {
-    }
-
-
     public GameModel(int[][] grid) {
         this.grid = grid;
     }
 
-
-    public int getWinnerSteps() {
-        return winnerSteps;
-    }
-
-    public String getWinner() {
-        return winner;
-    }
-
-    public void setP1name(String p1name) {
-        this.p1name = p1name;
-    }
-
-    public void setP2name(String p2name) {
-        this.p2name = p2name;
-    }
-
-    public void setP1steps(int steps) {
-        this.p1steps = steps;
-    }
-
-    public void setP2steps(int steps) {
-        this.p2steps = steps;
-    }
-
-    public int getP1steps() {
-        return p1steps;
-    }
-
-    public int getP2steps() {
-        return p2steps;
-    }
-
-    public String getP1name() {
-        return p1name;
-    }
-
-    public String getP2name() {
-        return p2name;
-    }
 
 
     public boolean isValidMove(int playerId, int row, int col, int direction) {
