@@ -263,6 +263,16 @@ public class GameModel {
         }
     }
 
+    public boolean hasBlueWon () {
+        if (verticalCheck(1) || horizontalCheck(1) || diagonalCheck(1)) {
+            winner = p1name;
+            winnerSteps = p1steps;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 
 }
