@@ -162,6 +162,35 @@ public class GameModel {
     }
 
 
+    public void move(int playerId, int row, int col, int direction) {
+
+        if (isValidMove(playerId, row, col, direction)) {
+            switch (direction) {
+                case RIGHT: {
+                    grid[row][col + 1] = grid[row][col];
+                    grid[row][col] = 0;
+                    break;
+                }
+                case LEFT: {
+                    grid[row][col - 1] = grid[row][col];
+                    grid[row][col] = 0;
+                    break;
+                }
+                case UP: {
+                    grid[row - 1][col] = grid[row][col];
+                    grid[row][col] = 0;
+                    break;
+                }
+                case DOWN: {
+                    grid[row + 1][col] = grid[row][col];
+                    grid[row][col] = 0;
+                    break;
+                }
+
+            }
+        }
+
+    }
 
 
 
