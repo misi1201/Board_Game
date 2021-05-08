@@ -48,6 +48,26 @@ public class GameController {
 
     @FXML
     public void initialize(){
+
+        Platform.runLater(() -> {
+            player1name.setText(p1name);
+            player2name.setText(p2name);
+            gameModel.setP1name(player1name.getText());
+            gameModel.setP2name(player2name.getText());
+        });
+        startGame();
+}
+
+    public void startGame(){
+        currentPlayer = 1;
+        gameModel = new GameModel();
+        gameModel.setP1steps(0);
+        gameModel.setP2steps(0);
+        player1steps.setText(gameModel.getP1steps()+"");
+        player2steps.setText(gameModel.getP2steps()+"");
+        gameModel.setP1name(player1name.getText());
+        gameModel.setP2name(player2name.getText());
+        winnerLabel.setText("");
         for(int i = 0; i < 320; i+= squareSize){
             for(int j = 0; j < size; j+= squareSize){
                 Rectangle r = new Rectangle(i,j,squareSize,squareSize);
@@ -60,35 +80,16 @@ public class GameController {
 
 
 
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
-            Circle c = new Circle();
-            if (i == 0 && j == 0 || i == 2 && j == 0 || i == 1 && j == 4 || i == 3 && j == 4) {
-                c.setFill(Color.BLUE);
-                c.setStroke(Color.BLACK);
-
-                double radius = squareSize / 2.5;
-                int x = squareSize / 2 + squareSize * (0+i);
-                int y = squareSize / 2 + squareSize * (0+j);
-                c.setRadius(radius);
-                c.setTranslateX(x);
-                c.setTranslateY(y);
-                pane.getChildren().add(c);
-
-                c.setOnMousePressed(mouseEvent -> mousePressed(mouseEvent, c));
-                c.setOnMouseDragged(mouseEvent -> mouseDragged(mouseEvent, c));
-                c.setOnMouseReleased(mouseEvent -> mouseReleased(mouseEvent, c));
-
-
-            }
-            else {
-                if (i == 1 && j == 0 || i == 3 && j == 0 || i == 0 && j == 4 || i == 2 && j == 4) {
-                    c.setFill(Color.RED);
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                Circle c = new Circle();
+                if (i == 0 && j == 0 || i == 2 && j == 0 || i == 1 && j == 4 || i == 3 && j == 4) {
+                    c.setFill(Color.BLUE);
                     c.setStroke(Color.BLACK);
 
                     double radius = squareSize / 2.5;
-                    int x = squareSize / 2 + squareSize * (0 + i);
-                    int y = squareSize / 2 + squareSize * (0 + j);
+                    int x = squareSize / 2 + squareSize * (0+i);
+                    int y = squareSize / 2 + squareSize * (0+j);
                     c.setRadius(radius);
                     c.setTranslateX(x);
                     c.setTranslateY(y);
@@ -100,15 +101,30 @@ public class GameController {
 
 
                 }
+                else {
+                    if (i == 1 && j == 0 || i == 3 && j == 0 || i == 0 && j == 4 || i == 2 && j == 4) {
+                        c.setFill(Color.RED);
+                        c.setStroke(Color.BLACK);
+
+                        double radius = squareSize / 2.5;
+                        int x = squareSize / 2 + squareSize * (0 + i);
+                        int y = squareSize / 2 + squareSize * (0 + j);
+                        c.setRadius(radius);
+                        c.setTranslateX(x);
+                        c.setTranslateY(y);
+                        pane.getChildren().add(c);
+
+                        c.setOnMousePressed(mouseEvent -> mousePressed(mouseEvent, c));
+                        c.setOnMouseDragged(mouseEvent -> mouseDragged(mouseEvent, c));
+                        c.setOnMouseReleased(mouseEvent -> mouseReleased(mouseEvent, c));
+
+
+                    }
+                }
             }
         }
+
     }
-
-
-
-
-}
-
 
     private void mouseReleased(MouseEvent mouseEvent, Circle c) {
         int gridX = (int) c.getTranslateX() / squareSize;
@@ -137,7 +153,7 @@ public class GameController {
     }
 
     public void resetGame(ActionEvent actionEvent) {
-        initialize();
+        startGame();
     }
 
 
