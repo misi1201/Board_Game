@@ -189,9 +189,20 @@ public class GameModel {
 
             }
         }
-
+        kiir();
     }
 
+    private void kiir() {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (j % 4 == 0) {
+                    System.out.println("");
+                }
+                System.out.print(grid[i][j] + " ");
+            }
+        }
+        System.out.println("");
+    }
 
 
 
