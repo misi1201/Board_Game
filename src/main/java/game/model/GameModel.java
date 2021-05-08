@@ -234,6 +234,22 @@ public class GameModel {
         return false;
     }
 
+    public boolean diagonalCheck(int playerId) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (grid[i][j] == playerId) {
+                    if (i != 0 && j != grid[i].length-1 && i != grid.length-1 && j !=0 && grid[i-1][j+1] == playerId && grid[i+1][j-1] == playerId ||
+                            i != 0 && i != grid.length-1 && j != grid[i].length-1 && j !=0 && grid[i-1][j-1] == playerId && grid[i+1][j+1] == playerId
+                    ) {
+                        System.out.println("NYERT");
+                        return true;
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
 
 
 
