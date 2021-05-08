@@ -219,6 +219,20 @@ public class GameModel {
         return false;
     }
 
+    public boolean verticalCheck(int playerId) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (grid[i][j] == playerId) {
+                    if (i != 0 && i != grid.length-1 && grid[i - 1][j] == playerId && grid[i + 1][j] == playerId) {
+                        System.out.println("NYERT");
+                        return true;
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
 
 
 
