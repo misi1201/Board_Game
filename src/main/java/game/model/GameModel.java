@@ -2,9 +2,11 @@ package game.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Data
 @NoArgsConstructor
+@Slf4j
 public class GameModel {
 
     private static final int RIGHT = 0;
@@ -50,7 +52,7 @@ public class GameModel {
         boolean isValid = false;
 
         if (playerId == 1 && grid[row][col] == 2 || !(playerId == 1) && grid[row][col] == 1) {
-            System.out.println("Nem a te köröd!");
+            log.info("You can not move, because it is {}'s turn!", playerId);
             isValid = false;
         } else {
             try {
@@ -59,28 +61,37 @@ public class GameModel {
                         case RIGHT: {
                             if (grid[row][col + 1] == 0) {
                                 isValid = true;
+                            } else {
+                                log.info("You can not move there, because there is a puck on ({},{})",row,col + 1);
                             }
                             break;
                         }
                         case LEFT: {
                             if (grid[row][col - 1] == 0) {
                                 isValid = true;
+                            } else {
+                                log.info("You can not move there, because there is a puck on ({},{})",row,col - 1);
                             }
                             break;
                         }
                         case UP: {
                             if (grid[row - 1][col] == 0) {
                                 isValid = true;
+                            } else {
+                                log.info("You can not move there, because there is a puck on ({},{})",row - 1,col);
                             }
                             break;
                         }
                         case DOWN: {
                             if (grid[row + 1][col] == 0) {
                                 isValid = true;
+                            } else {
+                                log.info("You can not move there, because there is a puck on ({},{})",row + 1,col);
                             }
                             break;
                         }
                         default:
+                            log.info("Invalid move, you cannot move there!");
                             isValid = false;
                     }
                 } else {
@@ -89,34 +100,44 @@ public class GameModel {
                             case RIGHT: {
                                 if (grid[row][col + 1] == 0) {
                                     isValid = true;
+                                } else {
+                                    log.info("You can not move there, because there is a puck on ({},{})",row,col + 1);
                                 }
                                 break;
                             }
                             case LEFT: {
                                 if (grid[row][col - 1] == 0) {
                                     isValid = true;
+                                } else {
+                                    log.info("You can not move there, because there is a puck on ({},{})",row,col - 1);
                                 }
                                 break;
                             }
                             case UP: {
                                 if (grid[row - 1][col] == 0) {
                                     isValid = true;
+                                } else {
+                                    log.info("You can not move there, because there is a puck on ({},{})",row -1 ,col);
                                 }
                                 break;
                             }
                             case DOWN: {
                                 if (grid[row + 1][col] == 0) {
                                     isValid = true;
+                                } else {
+                                    log.info("You can not move there, because there is a puck on ({},{})",row + 1,col);
                                 }
                                 break;
                             }
                             default:
                                 isValid = false;
+                                log.info("Invalid direction, you can not move to that space!");
                         }
                     }
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 isValid = false;
+                log.warn("You can not move out of the field!");
             }
         }
         return isValid;
@@ -130,21 +151,25 @@ public class GameModel {
                 case RIGHT: {
                     grid[row][col + 1] = grid[row][col];
                     grid[row][col] = 0;
+                    log.info("{} moved from ({}, {}) to ({}, {}).", playerId, row, col, row, col + 1);
                     break;
                 }
                 case LEFT: {
                     grid[row][col - 1] = grid[row][col];
                     grid[row][col] = 0;
+                    log.info("{} moved from ({}, {}) to ({}, {}).", playerId, row, col, row, col - 1);
                     break;
                 }
                 case UP: {
                     grid[row - 1][col] = grid[row][col];
                     grid[row][col] = 0;
+                    log.info("{} moved from ({}, {}) to ({}, {}).", playerId, row, col, row - 1, col);
                     break;
                 }
                 case DOWN: {
                     grid[row + 1][col] = grid[row][col];
                     grid[row][col] = 0;
+                    log.info("{} moved from ({}, {}) to ({}, {}).", playerId, row, col, row + 1, col);
                     break;
                 }
 
