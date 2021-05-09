@@ -30,7 +30,7 @@ public class LaunchController {
         if (player1name.getText().isEmpty() || player2name.getText().isEmpty()) {
             errorLabel.setText("Enter your name!");
         } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
             Parent root = loader.load();
             GameController gameController = loader.<GameController>getController();
             gameController.setName(player1name.getText(), player2name.getText());
