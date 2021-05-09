@@ -146,13 +146,48 @@ public class GameController {
     private void mouseReleased(MouseEvent mouseEvent, Circle c) {
         int gridX = (int) c.getTranslateX() / squareSize;
         int gridY = (int) c.getTranslateY() / squareSize;
+        int dir;
+        if (gridX == prevX + 1 && gridY == prevY) {
+            dir = 0;
+        } else {
+            if (gridX == prevX - 1 && gridY == prevY) {
+                dir = 1;
+            } else {
+                if (gridY == prevY - 1 && gridX == prevX) {
+                    dir = 2;
+                } else {
+                    if (gridY == prevY + 1 && gridX == prevX) {
+                        dir = 3;
+                    } else {
+                        dir = -1;
+                    }
+                }
+            }
+        }
 
-        int dirX = (int) (squareSize / 2) + squareSize * gridX;
-        int dirY = (int) (squareSize / 2) + squareSize * gridY;
+        if (gameModel.isValidMove(currentPlayer,prevY, prevX,dir)){
+            int dirX = (int) (squareSize / 2) + squareSize * gridX;
+            int dirY = (int) (squareSize / 2) + squareSize * gridY;
+            gameModel.move(currentPlayer,prevY,prevX,dir);
+            c.setTranslateX(dirX);
+            c.setTranslateY(dirY);
+            increasePlayerStep(currentPlayer);
+            if(currentPlayer == 1) {
+                currentPlayer = 2;
+            }
+            else {
+                currentPlayer = 1;
+            }
+            if (gameModel.isGameOver()){
+                System.out.println("MEGNYERTED");
+                winnerLabel.setText(gameModel.getWinner()+" won the game.");
+            }
 
-        c.setTranslateX(dirX);
-        c.setTranslateY(dirY);
-
+        }
+        else {
+            c.setTranslateX(squareSize / 2 + squareSize * prevX);
+            c.setTranslateY(squareSize / 2 + squareSize * prevY);
+        }
 
     }
 
