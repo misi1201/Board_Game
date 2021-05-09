@@ -1,6 +1,7 @@
 package game.javafx.controller;
 
 import game.model.GameModel;
+import game.model.Player;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,9 +40,11 @@ public class GameController {
     private int prevX;
     private int prevY;
     private GameModel gameModel;
-    private int currentPlayer;
+    private Player currentPlayer;
     private String p1name;
     private String p2name;
+    private Player player1;
+    private Player player2;
 
 
 
@@ -52,22 +55,23 @@ public class GameController {
         Platform.runLater(() -> {
             player1name.setText(p1name);
             player2name.setText(p2name);
-            gameModel.setP1name(player1name.getText());
-            gameModel.setP2name(player2name.getText());
+            player1.setName(p1name);
+            player2.setName(p2name);
         });
         startGame();
 }
 
     public void startGame(){
-        currentPlayer = 1;
         gameModel = new GameModel();
-        gameModel.setP1steps(0);
-        gameModel.setP2steps(0);
-        player1steps.setText(gameModel.getP1steps()+"");
-        player2steps.setText(gameModel.getP2steps()+"");
-        gameModel.setP1name(player1name.getText());
-        gameModel.setP2name(player2name.getText());
+        player1 = new Player(player1name.getText(),1,0);
+        player2 = new Player(player2name.getText(),2,0);
+        player1steps.setText("Steps: " + player1.getStepCount());
+        player2steps.setText("Steps: " + player2.getStepCount());
+        gameModel.setBluePlayer(player1);
+        gameModel.setRedPlayer(player2);
+        currentPlayer = player1;
         winnerLabel.setText("");
+
         for(int i = 0; i < 320; i+= squareSize){
             for(int j = 0; j < size; j+= squareSize){
                 Rectangle r = new Rectangle(i,j,squareSize,squareSize);
@@ -126,14 +130,14 @@ public class GameController {
 
     }
 
-    private void increasePlayerStep(int playerId) {
-        if (playerId == 1) {
-            gameModel.setP1steps(gameModel.getP1steps()+1);
-            player1steps.setText(gameModel.getP1steps()+"");
+    private void increasePlayerStep(Player currentPlayer) {
+        if (currentPlayer.getPlayerId() == 1) {
+            currentPlayer.setStepCount(currentPlayer.getStepCount() + 1);
+            player1steps.setText("Steps: " + player1.getStepCount());
         }
         else {
-            gameModel.setP2steps(gameModel.getP2steps()+1);
-            player2steps.setText(gameModel.getP2steps()+"");
+            currentPlayer.setStepCount(currentPlayer.getStepCount() + 1);
+            player2steps.setText("Steps: " + player2.getStepCount());
         }
     }
 
@@ -172,15 +176,15 @@ public class GameController {
             c.setTranslateX(dirX);
             c.setTranslateY(dirY);
             increasePlayerStep(currentPlayer);
-            if(currentPlayer == 1) {
-                currentPlayer = 2;
+            if(currentPlayer.getPlayerId() == 1) {
+                currentPlayer = player2;
             }
             else {
-                currentPlayer = 1;
+                currentPlayer = player1;
             }
             if (gameModel.isGameOver()){
                 System.out.println("MEGNYERTED");
-                winnerLabel.setText(gameModel.getWinner()+" won the game.");
+                winnerLabel.setText(gameModel.getWinner().getName()+" won the game.");
             }
 
         }

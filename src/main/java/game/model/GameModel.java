@@ -20,17 +20,13 @@ public class GameModel {
 
     private static final int DOWN = 3;
 
-    private int p1steps;
+    private Player bluePlayer;
 
-    private int p2steps;
+    private Player redPlayer;
 
-    private String p1name;
+    private Player winner;
 
-    private String p2name;
-
-    private String winner;
-
-    private int winnerSteps;
+    private Player loser;
 
     private int[][] grid = {
             {1, 2, 1, 2},
@@ -47,16 +43,16 @@ public class GameModel {
 
 
 
-    public boolean isValidMove(int playerId, int row, int col, int direction) {
+    public boolean isValidMove(Player currentPlayer, int row, int col, int direction) {
 
         boolean isValid = false;
 
-        if (playerId == 1 && grid[row][col] == 2 || !(playerId == 1) && grid[row][col] == 1) {
-            log.info("You can not move, because it is {}'s turn!", playerId);
+        if (currentPlayer.getPlayerId() == 1 && grid[row][col] == 2 || !(currentPlayer.getPlayerId() == 1) && grid[row][col] == 1) {
+            log.info("You can not move, because it is the other player's turn!");
             isValid = false;
         } else {
             try {
-                if (playerId == 1) {
+                if (currentPlayer.getPlayerId() == 1) {
                     switch (direction) {
                         case RIGHT: {
                             if (grid[row][col + 1] == 0) {
@@ -95,7 +91,7 @@ public class GameModel {
                             isValid = false;
                     }
                 } else {
-                    if (playerId == 2) {
+                    if (currentPlayer.getPlayerId() == 2) {
                         switch (direction) {
                             case RIGHT: {
                                 if (grid[row][col + 1] == 0) {
@@ -144,32 +140,32 @@ public class GameModel {
     }
 
 
-    public void move(int playerId, int row, int col, int direction) {
+    public void move(Player currentPlayer, int row, int col, int direction) {
 
-        if (isValidMove(playerId, row, col, direction)) {
+        if (isValidMove(currentPlayer, row, col, direction)) {
             switch (direction) {
                 case RIGHT: {
                     grid[row][col + 1] = grid[row][col];
                     grid[row][col] = 0;
-                    log.info("{} moved from ({}, {}) to ({}, {}).", playerId, row, col, row, col + 1);
+                    log.info("{} moved from ({}, {}) to ({}, {}).", currentPlayer.getName(), row, col, row, col + 1);
                     break;
                 }
                 case LEFT: {
                     grid[row][col - 1] = grid[row][col];
                     grid[row][col] = 0;
-                    log.info("{} moved from ({}, {}) to ({}, {}).", playerId, row, col, row, col - 1);
+                    log.info("{} moved from ({}, {}) to ({}, {}).", currentPlayer.getName(), row, col, row, col - 1);
                     break;
                 }
                 case UP: {
                     grid[row - 1][col] = grid[row][col];
                     grid[row][col] = 0;
-                    log.info("{} moved from ({}, {}) to ({}, {}).", playerId, row, col, row - 1, col);
+                    log.info("{} moved from ({}, {}) to ({}, {}).", currentPlayer.getName(), row, col, row - 1, col);
                     break;
                 }
                 case DOWN: {
                     grid[row + 1][col] = grid[row][col];
                     grid[row][col] = 0;
-                    log.info("{} moved from ({}, {}) to ({}, {}).", playerId, row, col, row + 1, col);
+                    log.info("{} moved from ({}, {}) to ({}, {}).", currentPlayer.getName(), row, col, row + 1, col);
                     break;
                 }
 
@@ -190,11 +186,11 @@ public class GameModel {
         System.out.println("");
     }
 
-    public boolean horizontalCheck(int playerId) {
+    public boolean horizontalCheck(Player currentPlayer) {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < 4; j++) {
-                if (grid[i][j] == playerId) {
-                    if (j != 0 && j != grid[i].length-1 && grid[i][j-1] == playerId && grid[i][j+1] == playerId) {
+                if (grid[i][j] == currentPlayer.getPlayerId()) {
+                    if (j != 0 && j != grid[i].length-1 && grid[i][j-1] == currentPlayer.getPlayerId() && grid[i][j+1] == currentPlayer.getPlayerId()) {
                         System.out.println("NYERT");
                         return true;
                     }
@@ -205,11 +201,11 @@ public class GameModel {
         return false;
     }
 
-    public boolean verticalCheck(int playerId) {
+    public boolean verticalCheck(Player currentPlayer) {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < 4; j++) {
-                if (grid[i][j] == playerId) {
-                    if (i != 0 && i != grid.length-1 && grid[i - 1][j] == playerId && grid[i + 1][j] == playerId) {
+                if (grid[i][j] == currentPlayer.getPlayerId()) {
+                    if (i != 0 && i != grid.length-1 && grid[i - 1][j] == currentPlayer.getPlayerId() && grid[i + 1][j] == currentPlayer.getPlayerId()) {
                         System.out.println("NYERT");
                         return true;
                     }
@@ -220,12 +216,12 @@ public class GameModel {
         return false;
     }
 
-    public boolean diagonalCheck(int playerId) {
+    public boolean diagonalCheck(Player currentPlayer) {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < 4; j++) {
-                if (grid[i][j] == playerId) {
-                    if (i != 0 && j != grid[i].length-1 && i != grid.length-1 && j !=0 && grid[i-1][j+1] == playerId && grid[i+1][j-1] == playerId ||
-                            i != 0 && i != grid.length-1 && j != grid[i].length-1 && j !=0 && grid[i-1][j-1] == playerId && grid[i+1][j+1] == playerId
+                if (grid[i][j] == currentPlayer.getPlayerId()) {
+                    if (i != 0 && j != grid[i].length-1 && i != grid.length-1 && j !=0 && grid[i-1][j+1] == currentPlayer.getPlayerId() && grid[i+1][j-1] == currentPlayer.getPlayerId() ||
+                            i != 0 && i != grid.length-1 && j != grid[i].length-1 && j !=0 && grid[i-1][j-1] == currentPlayer.getPlayerId() && grid[i+1][j+1] == currentPlayer.getPlayerId()
                     ) {
                         System.out.println("NYERT");
                         return true;
@@ -240,9 +236,9 @@ public class GameModel {
     public boolean hasRedWon() {
 
 
-        if (verticalCheck(2) || horizontalCheck(2) || diagonalCheck(2)) {
-            winner = p2name;
-            winnerSteps = p2steps;
+        if (verticalCheck(redPlayer) || horizontalCheck(redPlayer) || diagonalCheck(redPlayer)) {
+            winner = redPlayer;
+            loser = redPlayer;
             return true;
         } else {
             return false;
@@ -250,9 +246,9 @@ public class GameModel {
     }
 
     public boolean hasBlueWon () {
-        if (verticalCheck(1) || horizontalCheck(1) || diagonalCheck(1)) {
-            winner = p1name;
-            winnerSteps = p1steps;
+        if (verticalCheck(bluePlayer) || horizontalCheck(bluePlayer) || diagonalCheck(bluePlayer)) {
+            winner = bluePlayer;
+            loser = redPlayer;
             return true;
         }
         else {
