@@ -137,6 +137,11 @@ public class GameController {
         }
     }
 
+    public void setName(String p1name, String p2name) {
+        this.p1name = p1name;
+        this.p2name = p2name;
+    }
+
 
     private void mouseReleased(MouseEvent mouseEvent, Circle c) {
         int gridX = (int) c.getTranslateX() / squareSize;
