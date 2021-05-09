@@ -126,6 +126,18 @@ public class GameController {
 
     }
 
+    private void increasePlayerStep(int playerId) {
+        if (playerId == 1) {
+            gameModel.setP1steps(gameModel.getP1steps()+1);
+            player1steps.setText(gameModel.getP1steps()+"");
+        }
+        else {
+            gameModel.setP2steps(gameModel.getP2steps()+1);
+            player2steps.setText(gameModel.getP2steps()+"");
+        }
+    }
+
+
     private void mouseReleased(MouseEvent mouseEvent, Circle c) {
         int gridX = (int) c.getTranslateX() / squareSize;
         int gridY = (int) c.getTranslateY() / squareSize;
