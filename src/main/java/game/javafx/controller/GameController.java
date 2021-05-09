@@ -197,6 +197,8 @@ public class GameController {
     }
 
     private void mousePressed(MouseEvent mouseEvent, Circle c) {
+        prevX = (int) c.getTranslateX() / squareSize;
+        prevY = (int) c.getTranslateY() / squareSize;
 
     }
 
