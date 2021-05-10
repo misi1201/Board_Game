@@ -57,6 +57,25 @@ public class GameModelTest {
 
     }
 
+    @Test
+    void testIsValidMove(){
+        gameModel = new GameModel(new int[][]{
+                {0, 1, 1, 0},
+                {2, 0, 0, 2},
+                {0, 1, 0, 0},
+                {0, 0, 0, 1},
+                {2, 2, 0, 0}
+        });
 
+        assertTrue(gameModel.isValidMove(player1, 0, 1, 3));
+        assertFalse(gameModel.isValidMove(player1, 0, 2, 1));
+        assertTrue(gameModel.isValidMove(player2, 1, 3, 2));
+        assertFalse(gameModel.isValidMove(player2, 4, 0, 1));
+        assertTrue(gameModel.isValidMove(player1, 2, 1, 1));
+        assertFalse(gameModel.isValidMove(player1, 4, 3, 5));
+        assertTrue(gameModel.isValidMove(player2, 4, 1, 2));
+        assertFalse(gameModel.isValidMove(player2, 0, 1, 3));
+
+    }
 
 }
