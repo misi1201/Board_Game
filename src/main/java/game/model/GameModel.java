@@ -127,7 +127,7 @@ public class GameModel {
                             }
                             default:
                                 isValid = false;
-                                log.info("Invalid direction, you can not move to that space!");
+                                log.info("Invalid move, you cannot move there!");
                         }
                     }
                 }
@@ -191,7 +191,7 @@ public class GameModel {
             for (int j = 0; j < 4; j++) {
                 if (grid[i][j] == currentPlayer.getPlayerId()) {
                     if (j != 0 && j != grid[i].length-1 && grid[i][j-1] == currentPlayer.getPlayerId() && grid[i][j+1] == currentPlayer.getPlayerId()) {
-                        System.out.println("NYERT");
+                        log.info("Horizontal victory!");
                         return true;
                     }
 
@@ -206,7 +206,7 @@ public class GameModel {
             for (int j = 0; j < 4; j++) {
                 if (grid[i][j] == currentPlayer.getPlayerId()) {
                     if (i != 0 && i != grid.length-1 && grid[i - 1][j] == currentPlayer.getPlayerId() && grid[i + 1][j] == currentPlayer.getPlayerId()) {
-                        System.out.println("NYERT");
+                        log.info("Vertical victory!");
                         return true;
                     }
 
@@ -223,7 +223,7 @@ public class GameModel {
                     if (i != 0 && j != grid[i].length-1 && i != grid.length-1 && j !=0 && grid[i-1][j+1] == currentPlayer.getPlayerId() && grid[i+1][j-1] == currentPlayer.getPlayerId() ||
                             i != 0 && i != grid.length-1 && j != grid[i].length-1 && j !=0 && grid[i-1][j-1] == currentPlayer.getPlayerId() && grid[i+1][j+1] == currentPlayer.getPlayerId()
                     ) {
-                        System.out.println("NYERT");
+                        log.info("Diagonal victory!");
                         return true;
                     }
 

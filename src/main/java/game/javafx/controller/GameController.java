@@ -12,7 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class GameController {
 
     @FXML
@@ -183,8 +185,8 @@ public class GameController {
                 currentPlayer = player1;
             }
             if (gameModel.isGameOver()){
-                System.out.println("MEGNYERTED");
                 winnerLabel.setText(gameModel.getWinner().getName()+" won the game.");
+                log.info(gameModel.getWinner().getName()+" won the game.");
             }
 
         }
