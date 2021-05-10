@@ -32,11 +32,27 @@ public class GameModelTest {
         assertFalse(gameModel.isValidMove(player1, 0, 0, 5));
         assertFalse(gameModel.isValidMove(player2, 0, 0, 3));
 
+        assertTrue(gameModel.isValidMove(player2, 0, 1, 3));
+        assertFalse(gameModel.isValidMove(player2, 0, 1, 2));
+        assertFalse(gameModel.isValidMove(player2, 0, 1, 1));
+        assertFalse(gameModel.isValidMove(player2, 0, 1, 0));
+        assertFalse(gameModel.isValidMove(player2, 0, 1, 5));
+        assertFalse(gameModel.isValidMove(player1, 0, 1, 3));
 
 
+        assertTrue(gameModel.isValidMove(player1, 4, 3, 2));
+        assertFalse(gameModel.isValidMove(player1, 4, 3, 3));
+        assertFalse(gameModel.isValidMove(player1, 4, 3, 1));
+        assertFalse(gameModel.isValidMove(player1, 4, 3, 0));
+        assertFalse(gameModel.isValidMove(player1, 4, 3, 5));
+        assertFalse(gameModel.isValidMove(player2, 4, 3, 2));
 
-
-
+        assertTrue(gameModel.isValidMove(player2, 4, 2, 2));
+        assertFalse(gameModel.isValidMove(player2, 4, 2, 3));
+        assertFalse(gameModel.isValidMove(player2, 4, 2, 1));
+        assertFalse(gameModel.isValidMove(player2, 4, 2, 0));
+        assertFalse(gameModel.isValidMove(player2, 4, 2, 5));
+        assertFalse(gameModel.isValidMove(player1, 4, 2, 2));
 
 
     }
