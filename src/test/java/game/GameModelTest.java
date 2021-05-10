@@ -78,4 +78,121 @@ public class GameModelTest {
 
     }
 
+    @Test
+    void testHasBlueWon(){
+        gameModel = new GameModel(new int[][]{
+                {2, 0, 0, 0},
+                {1, 1, 1, 2},
+                {0, 0, 0, 0},
+                {0, 0, 2, 0},
+                {0, 2, 0, 1}
+        });
+        gameModel.setBluePlayer(player1);
+        assertTrue(gameModel.hasBlueWon());
+
+        gameModel = new GameModel(new int[][]{
+                {0, 2, 0, 0},
+                {0, 1, 0, 0},
+                {2, 1, 0, 2},
+                {0, 1, 0, 0},
+                {0, 2, 0, 1}
+        });
+        gameModel.setBluePlayer(player1);
+        assertTrue(gameModel.hasBlueWon());
+
+
+        gameModel = new GameModel(new int[][]{
+                {0, 2, 0, 0},
+                {0, 0, 1, 2},
+                {0, 1, 2, 0},
+                {1, 0, 0, 0},
+                {2, 0, 0, 1}
+        });
+        gameModel.setBluePlayer(player1);
+        assertTrue(gameModel.hasBlueWon());
+
+
+        gameModel = new GameModel(new int[][]{
+                {0, 1, 0, 0},
+                {1, 2, 0, 2},
+                {2, 1, 2, 1},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
+        });
+        gameModel.setBluePlayer(player1);
+        assertFalse(gameModel.hasBlueWon());
+
+
+        gameModel = new GameModel(new int[][]{
+                {0, 0, 2, 0},
+                {1, 2, 1, 0},
+                {2, 0, 0, 0},
+                {0, 2, 0, 1},
+                {1, 0, 0, 0}
+        });
+        gameModel.setBluePlayer(player1);
+        assertFalse(gameModel.hasBlueWon());
+
+    }
+
+
+    @Test
+    void testHasRedWon(){
+        gameModel = new GameModel(new int[][]{
+                {0, 1, 0, 0},
+                {0, 2, 2, 2},
+                {0, 1, 0, 0},
+                {0, 1, 0, 0},
+                {2, 0, 0, 1}
+        });
+        gameModel.setRedPlayer(player2);
+        assertTrue(gameModel.hasRedWon());
+
+        gameModel = new GameModel(new int[][]{
+                {0, 0, 1, 0},
+                {0, 1, 2, 0},
+                {0, 0, 2, 0},
+                {2, 0, 2, 1},
+                {0, 1, 0, 0}
+        });
+        gameModel.setRedPlayer(player2);
+        assertTrue(gameModel.hasRedWon());
+
+        gameModel = new GameModel(new int[][]{
+                {2, 0, 0, 0},
+                {0, 2, 1, 0},
+                {1, 1, 2, 1},
+                {2, 0, 0, 0},
+                {0, 0, 0, 0}
+        });
+        gameModel.setRedPlayer(player2);
+        assertTrue(gameModel.hasRedWon());
+
+        gameModel = new GameModel(new int[][]{
+                {0, 0, 1, 0},
+                {0, 1, 2, 2},
+                {2, 0, 1, 1},
+                {0, 0, 2, 0},
+                {0, 0, 0, 0}
+        });
+        gameModel.setRedPlayer(player2);
+        assertFalse(gameModel.hasRedWon());
+
+
+        gameModel = new GameModel(new int[][]{
+                {0, 0, 0, 1},
+                {0, 2, 1, 2},
+                {0, 1, 2, 0},
+                {2, 0, 0, 0},
+                {0, 0, 0, 1}
+        });
+        gameModel.setRedPlayer(player2);
+        assertFalse(gameModel.hasRedWon());
+
+
+    }
+
+
+
+
 }
