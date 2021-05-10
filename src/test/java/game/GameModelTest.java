@@ -192,6 +192,44 @@ public class GameModelTest {
 
     }
 
+    @Test
+    void testIsGameOver(){
+        gameModel = new GameModel(new int[][]{
+                {0, 1, 0, 2},
+                {0, 1, 0, 0},
+                {0, 1, 2, 2},
+                {0, 0, 0, 0},
+                {2, 0, 0, 1}
+        });
+
+        gameModel.setBluePlayer(player1);
+        gameModel.setRedPlayer(player2);
+        assertTrue(gameModel.isGameOver());
+
+        gameModel = new GameModel(new int[][]{
+                {0, 0, 0, 0},
+                {0, 2, 1, 2},
+                {1, 1, 2, 0},
+                {2, 0, 0, 1},
+                {0, 0, 0, 0}
+        });
+
+        gameModel.setBluePlayer(player1);
+        gameModel.setRedPlayer(player2);
+        assertFalse(gameModel.isGameOver());
+
+        gameModel = new GameModel(new int[][]{
+                {1, 0, 0, 2},
+                {0, 1, 2, 0},
+                {0, 2, 0, 0},
+                {0, 1, 2, 1},
+                {0, 0, 0, 0}
+        });
+        gameModel.setBluePlayer(player1);
+        gameModel.setRedPlayer(player2);
+        assertTrue(gameModel.isGameOver());
+
+    }
 
 
 
