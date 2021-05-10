@@ -231,6 +231,51 @@ public class GameModelTest {
 
     }
 
+    @Test
+    void testMove(){
+        gameModel.move(player1, 0, 0, 3);
+        assertArrayEquals(new int[][] {
+                {0, 2, 1, 2},
+                {1, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {2, 1, 2, 1}},
+                gameModel.getGrid());
+
+        gameModel.move(player2,4,2,2);
+        assertArrayEquals(new int[][] {
+                {0, 2, 1, 2},
+                {1, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 2, 0},
+                {2, 1, 0, 1}},
+                gameModel.getGrid());
+
+        gameModel.setGrid(new int[][]{
+                {0, 0, 0, 0},
+                {1, 1, 0, 2},
+                {0, 2, 0, 0},
+                {2, 1, 2, 1},
+                {0, 0, 0, 0}});
+
+        gameModel.move(player1,1,0,3);
+        assertArrayEquals(new int[][] {
+                {0, 0, 0, 0},
+                {0, 1, 0, 2},
+                {1, 2, 0, 0},
+                {2, 1, 2, 1},
+                {0, 0, 0, 0}},
+                gameModel.getGrid());
+        gameModel.move(player2,2,1,0);
+        assertArrayEquals(new int[][] {
+                        {0, 0, 0, 0},
+                        {0, 1, 0, 2},
+                        {1, 0, 2, 0},
+                        {2, 1, 2, 1},
+                        {0, 0, 0, 0}},
+                gameModel.getGrid());
+    }
+
 
 
 }
