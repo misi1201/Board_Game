@@ -2,15 +2,45 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>hu.unideb.inf</groupId>
-    <artifactId>javafx-fxml-hello</artifactId>
-    <packaging>jar</packaging>
+    <groupId>inf.unideb.hu</groupId>
+    <artifactId>Board_Game</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
+    <description>A turn-based game played by two players with pucks.</description>
+    <scm>
+        <connection>scm:git:https://github.com/misi1201/Board_Game.git</connection>
+        <developerConnection>scm:git:https://github.com/misi1201/Board_Game.git</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <id>misi1201</id>
+            <name>Mihály Szilágyi</name>
+            <email>szilagyimihaly2000@gmail.com</email>
+            <organization>Faculty of Informatics, University of Debrecen</organization>
+            <organizationUrl>https://inf.unideb.hu/</organizationUrl>
+        </developer>
+        <developer>
+            <id>jeszy</id>
+            <name>Péter Jeszenszky</name>
+            <email>jeszenszky.peter@inf.unideb.hu</email>
+            <organization>Faculty of Informatics, University of Debrecen</organization>
+            <organizationUrl>https://inf.unideb.hu/</organizationUrl>
+        </developer>
+        <developer>
+            <id>roland</id>
+            <name>Roland Major</name>
+            <email>major.sandor@inf.unideb.hu</email>
+            <organization>Faculty of Informatics, University of Debrecen</organization>
+            <organizationUrl>https://inf.unideb.hu/</organizationUrl>
+        </developer>
+    </developers>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
         <exec.mainClass>game.javafx.main.Main</exec.mainClass>
+        <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
     </properties>
     <dependencies>
         <dependency>
