@@ -88,19 +88,19 @@
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
-            <version>4.2.3</version>
+            <version>5.0.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-persist</artifactId>
-            <version>4.2.3</version>
+            <version>5.0.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>ignite-guice</artifactId>
-            <version>1.0.2</version>
+            <version>1.2.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -125,6 +125,12 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.1-b11</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
@@ -224,6 +230,9 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+        <filters>
+            <filter>db.properties</filter>
+        </filters>
     </build>
     <reporting>
         <plugins>
