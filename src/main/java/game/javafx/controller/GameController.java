@@ -2,6 +2,11 @@ package game.javafx.controller;
 
 import game.model.GameModel;
 import game.model.Player;
+import game.result.GameResult;
+import game.result.GameResultDao;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +18,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+
+@SuppressWarnings("unchecked")
 @Slf4j
 public class GameController {
 
@@ -35,6 +46,13 @@ public class GameController {
     @FXML
     private Label winnerLabel;
 
+    private Instant startTime;
+
+    @FXML
+    private Label stopWatchLabel;
+
+    private Timeline stopWatchTimeline;
+
 
     private int size = 400;
     private int spots = 5;
@@ -47,6 +65,7 @@ public class GameController {
     private String p2name;
     private Player player1;
     private Player player2;
+    private GameResultDao gameResultDao;
 
 
 
@@ -73,6 +92,8 @@ public class GameController {
         gameModel.setRedPlayer(player2);
         currentPlayer = player1;
         winnerLabel.setText("");
+        startTime = Instant.now();
+        createStopWatch();
 
         for(int i = 0; i < 320; i+= squareSize){
             for(int j = 0; j < size; j+= squareSize){
@@ -187,6 +208,8 @@ public class GameController {
             if (gameModel.isGameOver()){
                 winnerLabel.setText(gameModel.getWinner().getName()+" won the game.");
                 log.info(gameModel.getWinner().getName()+" won the game.");
+                gameResultDao = new GameResultDao();
+                gameResultDao.persist(createGameResult());
             }
 
         }
@@ -216,6 +239,18 @@ public class GameController {
         startGame();
     }
 
+    private GameResult createGameResult(){
 
+        return GameResult.builder().player(gameModel.getWinner().getName()).steps(gameModel.getWinner().getStepCount()).duration(Duration.between(startTime,Instant.now())).build();
+    }
+
+    private void createStopWatch() {
+        stopWatchTimeline = new Timeline(new KeyFrame(javafx.util.Duration.ZERO, e -> {
+            long millisElapsed = startTime.until(Instant.now(), ChronoUnit.MILLIS);
+            stopWatchLabel.setText(DurationFormatUtils.formatDuration(millisElapsed, "HH:mm:ss"));
+        }), new KeyFrame(javafx.util.Duration.seconds(1)));
+        stopWatchTimeline.setCycleCount(Animation.INDEFINITE);
+        stopWatchTimeline.play();
+    }
 
 }
