@@ -4,30 +4,59 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Class representing the model of the game and the board.
+ */
 @Data
 @NoArgsConstructor
 @Slf4j
 public class GameModel {
 
+    /**
+     * Integer value that stores the direction of Right.
+     */
     private static final int RIGHT = 0;
 
-
+    /**
+     * Integer value that stores the direction of Left.
+     */
     private static final int LEFT = 1;
 
-
+    /**
+     * Integer value that stores the direction of Up.
+     */
     private static final int UP = 2;
 
-
+    /**
+     * Integer value that stores the direction of Down.
+     */
     private static final int DOWN = 3;
 
+    /**
+     * Player object that stores the player with the blue pucks.
+     */
     private Player bluePlayer;
 
+    /**
+     * Player object that stores the player with the red pucks.
+     */
     private Player redPlayer;
 
+    /**
+     * Player object that stores the winner Player.
+     */
     private Player winner;
 
+    /**
+     * Player object that stores the loser Player.
+     */
     private Player loser;
 
+    /**
+     * 2D array representing the state of the game.
+     *
+     * The blue pucks are represented as 1's, the red pucks are represented as 2's, and the empty spaces as 0's.
+     */
     private int[][] grid = {
             {1, 2, 1, 2},
             {0, 0, 0, 0},
@@ -36,13 +65,26 @@ public class GameModel {
             {2, 1, 2, 1}
     };
 
-
+    /**
+     * Constructor which takes a 2D array and set this array to the grid.
+     *
+     * @param grid 2D array of integers that stores the state of the game and the state of the board.
+     */
     public GameModel(int[][] grid) {
         this.grid = grid;
     }
 
 
-
+    /**
+     * A method that checks if the current move is possible or not.
+     *
+     * @param currentPlayer The player who has to move at the current state.
+     * @param row The row where the the current puck stands on the board.
+     * @param col The column where the current puck stands on the board.
+     * @param direction The direction where the player wants to move to.
+     *
+     * @return {@code true} if the player can move to the wanted direction, {@code false} otherwise.
+     */
     public boolean isValidMove(Player currentPlayer, int row, int col, int direction) {
 
         boolean isValid = false;
@@ -139,7 +181,14 @@ public class GameModel {
         return isValid;
     }
 
-
+    /**
+     * A method that modifies the grid if the current move is possible.
+     *
+     * @param currentPlayer The player who has to move at the current state.
+     * @param row The row where the the current puck stands on the board.
+     * @param col The column where the current puck stands on the board.
+     * @param direction The direction where the player wants to move to.
+     */
     public void move(Player currentPlayer, int row, int col, int direction) {
 
         if (isValidMove(currentPlayer, row, col, direction)) {
@@ -174,7 +223,13 @@ public class GameModel {
 
     }
 
-
+    /**
+     * A method that checks if the current player has won horizontally.
+     *
+     * @param currentPlayer The current player who might have won the game.
+     *
+     * @return {@code true} if the current player has won horizontally, {@code false} otherwise.
+     */
     public boolean horizontalCheck(Player currentPlayer) {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < 4; j++) {
@@ -190,6 +245,13 @@ public class GameModel {
         return false;
     }
 
+    /**
+     * A method that checks if the current player has won vertically.
+     *
+     * @param currentPlayer The current player who might have won the game.
+     *
+     * @return {@code true} if the current player has won vertically, {@code false} otherwise.
+     */
     public boolean verticalCheck(Player currentPlayer) {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < 4; j++) {
@@ -205,6 +267,13 @@ public class GameModel {
         return false;
     }
 
+    /**
+     * A method that checks if the current player has won diagonally.
+     *
+     * @param currentPlayer The current player who might have won the game.
+     *
+     * @return {@code true} if the current player has won diagonally, {@code false} otherwise.
+     */
     public boolean diagonalCheck(Player currentPlayer) {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < 4; j++) {
@@ -222,6 +291,11 @@ public class GameModel {
         return false;
     }
 
+    /**
+     * A method that checks if the player with the red pucks has won the game.
+     *
+     * @return {@code true} if the player with the red pucks has won the game, {@code false} otherwise.
+     */
     public boolean hasRedWon() {
 
 
@@ -234,6 +308,11 @@ public class GameModel {
         }
     }
 
+    /**
+     * A method that checks if the player with the blue pucks has won the game.
+     *
+     * @return {@code true} if the player with the blue pucks has won the game, {@code false} otherwise.
+     */
     public boolean hasBlueWon () {
         if (verticalCheck(bluePlayer) || horizontalCheck(bluePlayer) || diagonalCheck(bluePlayer)) {
             winner = bluePlayer;
@@ -245,6 +324,11 @@ public class GameModel {
         }
     }
 
+    /**
+     * A method that checks if the game is over.
+     *
+     * @return {@code true} if the game is over, {@code false} otherwise.
+     */
     public boolean isGameOver () {
         if (hasBlueWon() || hasRedWon()) {
             return true;
