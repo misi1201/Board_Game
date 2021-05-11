@@ -10,9 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
+@SuppressWarnings("unchecked")
+@Slf4j
 public class LaunchController {
 
     @FXML
@@ -44,6 +47,16 @@ public class LaunchController {
         Platform.exit();
     }
 
+    public void openHighScores(ActionEvent actionEvent) throws IOException {
 
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/highscores.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+        log.info("Loading highscores..");
+
+
+    };
 
 }
