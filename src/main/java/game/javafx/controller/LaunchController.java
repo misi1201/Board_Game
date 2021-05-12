@@ -32,6 +32,7 @@ public class LaunchController {
 
     /**
      * The startGame method is called when the game starts.
+     * @param actionEvent the current action event
      */
     public void startGame(ActionEvent actionEvent) throws IOException {
 
