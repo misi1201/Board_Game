@@ -12,7 +12,7 @@
       <Text fx:id="player2name" layoutX="489.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Text fx:id="player1steps" layoutX="89.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Text fx:id="player2steps" layoutX="489.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Label fx:id="winnerLabel" layoutX="286.0" layoutY="44.0" />
+      <Label fx:id="winnerLabel" layoutX="230.0" layoutY="35.0" />
       <Button fx:id="exitButton" layoutX="372.0" layoutY="534.0" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
       <Button fx:id="resetButton" layoutX="100.0" layoutY="534.0" mnemonicParsing="false" onAction="#resetGame" text="Reset" />
       <Label fx:id="stopWatchLabel" layoutX="268.0" layoutY="60.0" text="00:00:00" />

@@ -11,7 +11,7 @@
         <TextField fx:id="player2name" layoutX="375.0" layoutY="200.0" promptText="Player 2's name" />
         <Button fx:id="startButton" layoutX="275.0" layoutY="281.0" mnemonicParsing="false" onAction="#startGame" text="Start" />
         <Button fx:id="exitButton" layoutX="278.0" layoutY="346.0" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
-        <Label fx:id="errorLabel" layoutX="272.0" layoutY="139.0" />
-      <Button layoutX="429.0" layoutY="305.0" mnemonicParsing="false" onAction="#openHighScores" text="HighScores" />
+        <Label fx:id="errorLabel" layoutX="245.0" layoutY="170.0" />
+      <Button layoutX="254.0" layoutY="200.0" mnemonicParsing="false" onAction="#openHighScores" text="HighScores" />
     </children>
 </Pane>
