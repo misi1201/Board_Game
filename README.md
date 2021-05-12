@@ -11,8 +11,10 @@ The board is a 5x4 grid. If a player manages to arrange 3 pucks with the same co
 
 ## Allowed moves
 
-The blue player can move one blue puck on the field in the following directions: up,down,left, right
+The blue player can move one blue puck on the field in the following directions: up,down,left,right.
+
 You cannot move diagonally.
+
 You can only move on a field, if there is no puck on that specific field.
 
 ## Controls
