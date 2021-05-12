@@ -49,12 +49,8 @@ public class GameController {
     @FXML
     private Label winnerLabel;
 
-    private Instant startTime;
-
     @FXML
     private Label stopWatchLabel;
-
-    private Timeline stopWatchTimeline;
 
 
     private int size = 400;
@@ -69,7 +65,8 @@ public class GameController {
     private Player player1;
     private Player player2;
     private GameResultDao gameResultDao;
-
+    private Instant startTime;
+    private Timeline stopWatchTimeline;
 
 
     /**
