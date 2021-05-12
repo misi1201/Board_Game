@@ -27,6 +27,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
 
+/**
+ * The controller class for the high score scene.
+ */
 @SuppressWarnings("unchecked")
 @Slf4j
 public class HighScoreController {
@@ -100,6 +103,11 @@ public class HighScoreController {
         highScoreTable.setItems(observableResult);
     }
 
+    /**
+     * A method that is called when a player clicks on the restart button.
+     * @param actionEvent the current action event
+     * @throws IOException if the wanted scene can not be found
+     */
     public void handleRestartButton(ActionEvent actionEvent) throws IOException {
         log.debug("{} is pressed", ((Button) actionEvent.getSource()).getText());
         log.info("Loading launch scene...");

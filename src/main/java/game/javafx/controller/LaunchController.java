@@ -14,6 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
+/**
+ * The controller class for the launch scene.
+ */
 @SuppressWarnings("unchecked")
 @Slf4j
 public class LaunchController {
@@ -27,7 +30,9 @@ public class LaunchController {
     @FXML
     private Label errorLabel;
 
-
+    /**
+     * The startGame method is called when the game starts.
+     */
     public void startGame(ActionEvent actionEvent) throws IOException {
 
         if (player1name.getText().isEmpty() || player2name.getText().isEmpty()) {
@@ -43,10 +48,18 @@ public class LaunchController {
         }
     }
 
+    /**
+     * A method that is called when a player clicks on the exit button.
+     * @param actionEvent the current action event
+     */
     public void exitGame(ActionEvent actionEvent) {
         Platform.exit();
     }
 
+    /**
+     * A method that is called when a player clicks on the HighScores button.
+     * @param actionEvent the current action event
+     */
     public void openHighScores(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/highscores.fxml"));

@@ -19,6 +19,9 @@ import java.time.ZonedDateTime;
 @Entity
 public class GameResult {
 
+    /**
+     * The id of the result in database.
+     */
     @Id
     @GeneratedValue
     private Long id;
@@ -47,6 +50,9 @@ public class GameResult {
     @Column(nullable = false)
     private ZonedDateTime created;
 
+    /**
+     * A method that creates the time when the player wins.
+     */
     @PrePersist
     protected void onPersist() {
         created = ZonedDateTime.now();

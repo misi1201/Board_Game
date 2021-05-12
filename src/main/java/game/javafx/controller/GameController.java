@@ -24,6 +24,9 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * The controller class for the game scene.
+ */
 @SuppressWarnings("unchecked")
 @Slf4j
 public class GameController {
@@ -69,7 +72,9 @@ public class GameController {
 
 
 
-
+    /**
+     * The initialize method that runs when the scene is opened.
+     */
     @FXML
     public void initialize(){
 
@@ -82,6 +87,9 @@ public class GameController {
         startGame();
 }
 
+    /**
+     * A method that initializes the starting state.
+     */
     public void startGame(){
         gameModel = new GameModel();
         player1 = new Player(player1name.getText(),1,0);
@@ -153,6 +161,10 @@ public class GameController {
 
     }
 
+    /**
+     * A method that increases the player's steps.
+     * @param currentPlayer the player who moved in the current round
+     */
     private void increasePlayerStep(Player currentPlayer) {
         if (currentPlayer.getPlayerId() == 1) {
             currentPlayer.setStepCount(currentPlayer.getStepCount() + 1);
@@ -164,12 +176,21 @@ public class GameController {
         }
     }
 
+    /**
+     * A method that sets the player's name to {@code p1name} and {@code p2name}.
+     * @param p1name the name of Player One (Blue)
+     * @param p2name the name of Player Two (Red)
+     */
     public void setName(String p1name, String p2name) {
         this.p1name = p1name;
         this.p2name = p2name;
     }
 
-
+    /**
+     * A mouseReleased method is invoked when a puck is being released.
+     * @param mouseEvent the current mouse event
+     * @param c the puck that has been dragged and released
+     */
     private void mouseReleased(MouseEvent mouseEvent, Circle c) {
         int gridX = (int) c.getTranslateX() / squareSize;
         int gridY = (int) c.getTranslateY() / squareSize;
@@ -220,30 +241,55 @@ public class GameController {
 
     }
 
+    /**
+     * A mouseDragged method is invoked when the mouse is dragged on a puck.
+     * @param mouseEvent the current mouse event
+     * @param c the puck that has been dragged
+     */
     private void mouseDragged(MouseEvent mouseEvent, Circle c) {
         c.setTranslateX(c.getTranslateX() + mouseEvent.getX());
         c.setTranslateY(c.getTranslateY() + mouseEvent.getY());
     }
 
+    /**
+     * A mousePressed method is invoked when the mouse is pressed on a puck.
+     * @param mouseEvent the current mouse event
+     * @param c the puck that has been pressed
+     */
     private void mousePressed(MouseEvent mouseEvent, Circle c) {
         prevX = (int) c.getTranslateX() / squareSize;
         prevY = (int) c.getTranslateY() / squareSize;
 
     }
 
+    /**
+     * A method that is called when a player clicks on the exit button.
+     * @param actionEvent the current action event
+     */
     public void exitGame(ActionEvent actionEvent) {
         Platform.exit();
     }
 
+    /**
+     * A method that is called when a player clicks on the reset button.
+     * @param actionEvent the current action event
+     */
     public void resetGame(ActionEvent actionEvent) {
         startGame();
     }
 
+    /**
+     * A method that creates the result of the game.
+     * @return A {@code GameResult} object that stores the result of the game
+     */
     private GameResult createGameResult(){
 
         return GameResult.builder().player(gameModel.getWinner().getName()).steps(gameModel.getWinner().getStepCount()).duration(Duration.between(startTime,Instant.now())).build();
     }
 
+    /**
+     * A method that creates and runs the stopwatch.
+     */
     private void createStopWatch() {
         stopWatchTimeline = new Timeline(new KeyFrame(javafx.util.Duration.ZERO, e -> {
             long millisElapsed = startTime.until(Instant.now(), ChronoUnit.MILLIS);
