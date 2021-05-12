@@ -33,11 +33,13 @@ public class LaunchController {
     /**
      * The startGame method is called when the game starts.
      * @param actionEvent the current action event
+     * @throws IOException if the wanted scene can not be found
      */
     public void startGame(ActionEvent actionEvent) throws IOException {
 
         if (player1name.getText().isEmpty() || player2name.getText().isEmpty()) {
             errorLabel.setText("Enter your name!");
+            log.info("Not enough names given!");
         } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
             Parent root = loader.load();
@@ -60,6 +62,7 @@ public class LaunchController {
     /**
      * A method that is called when a player clicks on the HighScores button.
      * @param actionEvent the current action event
+     * @throws IOException if the wanted scene can not be found
      */
     public void openHighScores(ActionEvent actionEvent) throws IOException {
 
